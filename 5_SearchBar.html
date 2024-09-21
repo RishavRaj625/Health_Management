@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Bar with Suggestions and History Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .search-container {
+            position: relative;
+            width: 300px;
+            margin: 0 auto;
+        }
+        #searchInput {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            border: 1px solid #ccc;
+            border-top: none;
+            background: #fff;
+            z-index: 1000;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+        .suggestions div {
+            padding: 10px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .suggestions div:hover {
+            background-color: #f0f0f0;
+        }
+        .clear-btn {
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #f44336;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            width: 300px;
+            margin: 10px auto 0;
+            text-align: center;
+            text-decoration: none;
+        }
+        .clear-btn:hover {
+            background-color: #d32f2f;
+        }
+        .delete-icon {
+            color: #888;
+            cursor: pointer;
+        }
+        .delete-icon:hover {
+            color: #f44336;
+        }
+    </style>
+</head>
+<body>
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search..." autocomplete="off">
+        <div id="suggestions" class="suggestions"></div>
+    </div>
+    <button class="clear-btn" id="clearHistory">Clear Search History</button>
+
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const suggestionsContainer = document.getElementById('suggestions');
+        const clearHistoryButton = document.getElementById('clearHistory');
+
+        // Maximum number of stored searches
+        const maxStoredSearches = 5;
+
+        // Load previous searches from local storage
+        let previousSearches = JSON.parse(localStorage.getItem('previousSearches')) || [];
+
+        // Function to save searches to local storage with a limit
+        function saveSearches() {
+            if (previousSearches.length > maxStoredSearches) {
+                previousSearches.shift(); // Remove the oldest search
+            }
+            localStorage.setItem('previousSearches', JSON.stringify(previousSearches));
+        }
+
+        // Function to update suggestions based on input
+        function updateSuggestions() {
+            const query = searchInput.value.toLowerCase();
+            suggestionsContainer.innerHTML = '';
+
+            if (query) {
+                const filteredSearches = previousSearches.filter(search => search.toLowerCase().includes(query));
+
+                filteredSearches.forEach(search => {
+                    const suggestionItem = document.createElement('div');
+                    suggestionItem.innerHTML = `<span>${search}</span><span class="delete-icon" data-search="${search}">&times;</span>`;
+                    
+                    suggestionItem.querySelector('.delete-icon').addEventListener('click', (event) => {
+                        event.stopPropagation();
+                        removeSearch(event.target.dataset.search);
+                    });
+
+                    suggestionItem.addEventListener('click', () => {
+                        searchInput.value = search;
+                        suggestionsContainer.innerHTML = '';
+                    });
+
+                    suggestionsContainer.appendChild(suggestionItem);
+                });
+            }
+        }
+
+        // Function to remove a specific search term
+        function removeSearch(search) {
+            previousSearches = previousSearches.filter(item => item !== search);
+            saveSearches();
+            updateSuggestions();
+        }
+
+        searchInput.addEventListener('input', updateSuggestions);
+
+        searchInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                const searchTerm = searchInput.value.trim();
+                if (searchTerm && !previousSearches.includes(searchTerm)) {
+                    previousSearches.push(searchTerm);
+                    saveSearches();
+                }
+                suggestionsContainer.innerHTML = '';
+                searchInput.value = '';
+                console.log('Searching for:', searchTerm);
+            }
+        });
+
+        clearHistoryButton.addEventListener('click', function() {
+            previousSearches = [];
+            localStorage.removeItem('previousSearches');
+            suggestionsContainer.innerHTML = '';
+        });
+    </script>
+</body>
+</html>

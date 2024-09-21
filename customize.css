@@ -1,0 +1,642 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@800&family=Martel+Sans:wght@600&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Prompt:ital,wght@1,300&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@800&family=Martel+Sans:wght@600&family=Poppins:wght@700&family=Prompt:ital,wght@1,300&family=Roboto:ital,wght@1,300&display=swap');
+
+/* font-family: 'Inconsolata', monospace;
+    font-family: 'Martel Sans', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    font-family: 'Prompt', sans-serif;
+    font-family: 'Roboto', sans-serif; */
+
+/* General styles */
+:root {
+    /* --primary-bg-color: #F9FAFB;
+    --secondary-bg-color: #F4F5F7;
+    --primary-text-color: #010102;
+    --secondary-text-color: #4B5563;
+    --button-color: #6366F1; */
+
+
+    --primary-bg-color: #FFF7ED;
+    --secondary-bg-color: #FFEDD5;
+    --primary-text-color: #2C3E50;
+    --secondary-text-color: #546E7A;
+    --button-color: #F97316;
+    --button-hover-color: #EA580C;
+    /* --button-color: #315aca;
+    --button-hover-color: #5254e2; */
+
+    --dark-bg-color: #010102;
+    --dark-text-color: #00e7f7;
+    --dark-card-bg-color: #555;
+    --dark-button-color: #444;
+    --dark-button-hover-color: #333;
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    /* box-sizing: border-box; */
+    background-color: var(--primary-bg-color);
+    color: var(--primary-text-color);
+    transition: all 0.3s ease;
+}
+
+header {
+    background-color: #fff;
+    background-color: var(--primary-bg-color);
+
+    border-bottom: 1px solid #ddd;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: background-color 0.3s;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+
+#logo {
+    display: flex;
+    align-items: center;
+    /* gap: 10px; */
+    margin-left: 100px;
+}
+
+#logo img {
+    width: 80px;
+    border-radius: 40px;
+    margin-right: 10px;
+    filter: drop-shadow(1px 1px 20px rgb(206, 195, 43));
+}
+
+#logo img:hover {
+    filter: drop-shadow(1px 1px 20px rgb(0, 215, 244));
+
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: var(--primary-text-color);
+    font-size: 16px;
+    font-weight: 500;
+    /* color: black; */
+    transition: color 0.3s;
+}
+
+.nav-links li a i {
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.nav-links li a.Always i {
+    color: var(--dark-text-color);
+}
+
+.nav-links li a:hover {
+    color: var(--dark-text-color);
+    cursor: pointer;
+    /* text-decoration: underline; */
+    /* font-size: 18px; */
+}
+
+#home {
+    background-color: var(--primary-bg-color);
+
+}
+
+/* Search bar in navigation */
+#box1 .search-container {
+    position: relative;
+    width: 400px;
+    margin: 0 auto;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#box1 .suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    /* border: 1px solid #ccc; */
+    border-top: none;
+    background: #fff;
+    z-index: 1000;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+#box1 .suggestions div {
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#box1 .suggestions div:hover {
+    background-color: #f0f0f0;
+}
+
+.menu-toggle,
+.dark-mode-toggle {
+    display: none;
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--primary-text-color);
+    transition: color 0.3s;
+}
+
+h1,
+h2 {
+    font-weight: 700;
+    text-align: center;
+}
+
+h3 {
+    font-weight: 400;
+    text-align: center;
+}
+
+p {
+    text-align: center;
+    color: var(--secondary-text-color);
+}
+
+#element {
+    color: var(--dark-text-color);
+}
+
+.box1 {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    /* display: inline-block;
+    background-color: var(--button-color);
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    text-align: center; */
+
+    text-align: center;
+    /* background-color: #007bff; */
+    background-color: var(--button-color);
+    color: white;
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+
+}
+
+.btn:hover {
+    /* background-color: #4F46E5; */
+    background-color: var(--button-hover-color);
+    /* Darker Purple */
+
+}
+
+/* Section Styles */
+
+.section:nth-child(even) {
+    background-color: var(--secondary-bg-color);
+}
+
+.grid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 2em 0;
+
+}
+
+.section {
+    padding: 60px 0;
+}
+
+.section.home {
+    background-color: #fff;
+}
+
+.section.home .btn {
+    /* background-color: #007bff; */
+    background-color: var(--button-color);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.section.home .btn:hover {
+    /* background-color: #0056b3; */
+    background-color: var(--button-hover-color);
+}
+
+.section .grid {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.section .grid .card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 30px;
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+    box-shadow: 20 20px 60px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.section .grid .card:hover {
+    transform: perspective(600px) rotateX(10deg);
+}
+
+.btn {
+    background-color: var(--button-color);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.card {
+    flex: 1;
+    min-width: 250px;
+    max-width: 300px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    /* position: relative; */
+
+    border-radius: 40px;
+    background-color: #c1c1c1;
+    box-shadow: 20px 20px 60px #FFF7ED, inset -20px -20px 60px #FFEDD5;
+}
+
+.card ul li {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-left: -180px;
+}
+
+.card ul li a {
+    text-decoration: none;
+}
+
+.card li a i {
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border-radius: 10px;
+    background-color: rgba(99, 102, 241, 0.1);
+    z-index: -1;
+}
+
+footer {
+    background-color: var(--primary-text-color);
+    color: white;
+    padding: 20px 0;
+}
+
+footer .container {
+    text-align: center;
+}
+footer :hover{
+    color: var(--dark-text-color);
+    font-size: 20px;
+}
+/* Form Styles */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--primary-text-color);
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.form-group textarea {
+    resize: vertical;
+    height: 100px;
+}
+
+
+
+/* Dark Mode Styles */
+.dark-mode {
+    background-color: black;
+    background-color: rgb(45, 45, 75);
+    /* Set background color to black */
+    color: #00e7f7;
+    /* Set text color to light blue */
+}
+
+.dark-mode .section.home {
+    background-color: rgb(45, 45, 75);
+    color: #23ccd8;
+    /* Set text color to light blue */
+}
+
+.dark-mode #home {
+    background-color: rgb(45, 45, 75);
+    color: #23ccd8;
+}
+
+.dark-mode .card:hover {
+    box-shadow: 2px 5px inset pink;
+    outline-offset: 40px
+}
+
+.dark-mode p {
+    color: #3ba7fa;
+}
+
+.dark-mode header {
+    /* Header background color to black */
+    background-color: rgb(45, 45, 75);
+    margin-bottom: 4px;
+
+}
+
+.dark-mode .section.about-us {
+    background-color: rgb(45, 45, 75);
+    /* background: linear-gradient(to right, rgb(45, 45, 75), #fff); */
+    margin-bottom: 4px;
+
+}
+
+.dark-mode #therapist {
+    background-color: rgb(45, 45, 75);
+    margin-bottom: 4px;
+}
+
+.dark-mode #dashboard {
+    background-color: rgb(45, 45, 75);
+    margin-bottom: 4px;
+
+}
+
+.dark-mode #self-assessment {
+    background-color: rgb(45, 45, 75);
+    margin-bottom: 4px;
+
+}
+
+.dark-mode #support-groups {
+    background-color: rgb(45, 45, 75);
+    margin-bottom: 4px;
+
+}
+
+.dark-mode #resources {
+    background-color: rgb(45, 45, 75);
+    margin-bottom: 4px;
+
+}
+
+.dark-mode #community-stories {
+    background-color: rgb(45, 45, 75);
+    margin-bottom: 4px;
+
+}
+
+.dark-mode #crisis-support {
+    background-color: rgb(45, 45, 75);
+    margin-bottom: 4px;
+
+}
+
+.dark-mode #events-webinars {
+    background-color: rgb(45, 45, 75);
+    margin-bottom: 4px;
+}
+
+.dark-mode #blog {
+    background-color: rgb(45, 45, 75);
+    margin-bottom: 4px;
+
+}
+
+.dark-mode #legal-privacy {
+    background-color: rgb(45, 45, 75);
+    margin-bottom: 4px;
+}
+
+
+.dark-mode .nav-links li a {
+    color: #00e7f7;
+    /* Navigation links color in dark mode */
+}
+
+.dark-mode .grid .card {
+    /* Card background color in dark mode */
+    color: #00e7f7;
+    /* Card text color in dark mode */
+    border-color: #444;
+    background-color: rgb(45, 45, 75);
+
+    /* Card border color in dark mode */
+}
+
+
+.dark-mode footer {
+    background-color: rgb(45, 45, 75);
+    /* Footer background color in dark mode */
+    color: #00e7f7;
+    /* Footer text color in dark mode */
+}
+
+.dark-mode .form-group label {
+    color: #00e7f7;
+    /* Form label text color in dark mode */
+}
+
+.dark-mode .form-group input,
+.dark-mode .form-group textarea {
+    background-color: #222;
+    /* Form input background color in dark mode */
+    color: #00e7f7;
+    /* Form input text color in dark mode */
+    border: 1px solid #444;
+    /* Form input border color in dark mode */
+}
+
+
+
+/* Responsive Styles */
+
+@media (max-width: 1350px) {
+    #logo {
+        margin-left: 50px;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        background-color: #fff;
+        width: 100%;
+        top: 60px;
+        left: 0;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .menu-toggle,
+    .dark-mode-toggle {
+        display: block;
+    }
+
+    .dark-mode-toggle {
+        margin-left: 10px;
+    }
+
+    .nav-links li.search-bar {
+        width: 90%;
+    }
+}
+
+
+@media (max-width: 830px) {
+    #logo {
+        margin-left: 30px;
+    }
+
+    #box1 .search-container {
+        width: 200px;
+    }
+    .card ul li {
+        margin-left: 0px;
+    }
+}
+
+@media (max-width: 630px) {
+    #logo {
+        margin-left: 0px;
+    }
+
+    .nav-links {
+        background-color: #fef9f9;
+        width: 70%;
+        left: 0;
+        top: 0px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        display: none;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .dark-mode-toggle {
+        display: block;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .dark-mode-toggle {
+        margin-left: 1px;
+    }
+    .card ul li {
+        margin-left: 0px;
+    }
+
+}
+
+
+
+
+
+
+/* Dark Mode Styles */
+.dark-mode {
+    background-color: var(--dark-bg-color);
+    color: var(--dark-text-color);
+}
+
+.dark-mode header {
+    background-color: #444;
+}
+
+.dark-mode .card {
+    background-color: var(--dark-card-bg-color);
+}
+
+.dark-mode .btn {
+    background-color: var(--dark-button-color);
+}
+
+.dark-mode .btn:hover {
+    background-color: var(--dark-button-hover-color);
+}
+
+.dark-mode .nav-links li a {
+    color: var(--dark-text-color);
+}

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech Recognition</title>
+</head>
+<style>
+    /* styles.css */
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-image: url("voice1.jpeg");
+    }
+
+    .container {
+        background-color: rgb(182, 226, 240);
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        width: 100%;
+        text-align: center;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+        font-size: 24px;
+        color: #333;
+    }
+
+    button {
+        background-color: #007BFF;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin: 5px;
+        font-size: 16px;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    .output {
+        margin-top: 20px;
+        text-align: left;
+    }
+
+    h2 {
+        font-size: 20px;
+        color: #555;
+    }
+
+    p {
+        background-color: #f9f9f9;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        min-height: 100px;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <h1><strong>Speech Recognition</strong></h1>
+        <div class="output">
+            <h2>Recognized Text:</h2>
+            <p id="transcript"></p>
+        </div>
+        <button id="startBtn">Start Listening</button>
+        <button id="stopBtn" disabled>Stop Listening</button>
+    </div>
+
+    <script>
+
+        // scripts.js
+
+// Check for browser support
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+if (!SpeechRecognition) {
+    alert('Your browser does not support the Web Speech API. Please use a modern browser like Chrome or Edge.');
+} else {
+    const recognition = new SpeechRecognition(); // Create a new speech recognition object
+    recognition.continuous = true; // Listen continuously
+    recognition.interimResults = true; // Show interim results as they're being spoken
+
+    const startBtn = document.getElementById('startBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const transcript = document.getElementById('transcript');
+
+    startBtn.addEventListener('click', () => {
+        recognition.start();
+        startBtn.disabled = true;
+        stopBtn.disabled = false;
+    });
+
+    stopBtn.addEventListener('click', () => {
+        recognition.stop();
+        startBtn.disabled = false;
+        stopBtn.disabled = true;
+    });
+
+    recognition.onresult = (event) => {
+        let interimTranscript = '';
+        let finalTranscript = '';
+
+        for (let i = event.resultIndex; i < event.results.length; ++i) {
+            if (event.results[i].isFinal) {
+                finalTranscript += event.results[i][0].transcript;
+            } else {
+                interimTranscript += event.results[i][0].transcript;
+            }
+        }
+        transcript.innerHTML = finalTranscript + '<i style="color: #ccc;">' + interimTranscript + '</i>';
+    };
+
+    recognition.onerror = (event) => {
+        console.error(event.error);
+    };
+
+    recognition.onend = () => {
+        startBtn.disabled = false;
+        stopBtn.disabled = true;
+    };
+}
+
+
+    </script>
+</body>
+
+</html>
